@@ -11,11 +11,10 @@ const opts = {
 };
 
 const githubOpts = {
-    clientID: 'Iv1.a14400d009b934f4', // Este dato debe ser pasado por parametro
-    clientSecret: 'fa0c70bb242d6fd814b17df0785416e4b87c2a0a', // Este dato debe ser pasado por parametro
-    callbackURL: "http://localhost:8080/api/sessions/githubcallback", // Este dato debe ser pasado por parametro
+    clientID: 'Iv1.a14400d009b934f4',
+    clientSecret: 'fa0c70bb242d6fd814b17df0785416e4b87c2a0a',
+    callbackURL: "http://localhost:8080/api/sessions/githubcallback",
 };
-
 
 export const initializePassport = () => {
 
@@ -39,26 +38,25 @@ export const initializePassport = () => {
         try {
             const user = await UserModel.findOne({ email });
 
-            // Verificación hardcoded para el rol de administrador
             if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
                 req.session.user = { email, role: 'admin' };
                 return done(null, { email, role: 'admin' });
             }
 
             if (!user) {
-                return done(new Error('Correo o contraseña invalidos 😨'));
+                return done(new Error('Correo/contraseña invalidos'));
             }
 
             const isPassValid = isValidPassword(password, user);
             if (!isPassValid) {
-                return done(new Error('Correo o contraseña invalidos 😨'));
+                return done(new Error('Correo/contraseña invalidos'));
             }
 
             req.session.user = { email, role: 'usuario' };
-            done(null, user); // Se autentica al usuario normal
+            done(null, user);
 
         } catch (error) {
-            done(new Error(`Ocurrio un error durante la autenticacion ${error.message} 😨.`));
+            done(new Error(`Ocurrio un error durante la autenticacion ${error.message}`));
         }
     }));
 
@@ -85,19 +83,18 @@ export const initializePassport = () => {
 
     }));
 
-
     passport.serializeUser((user, done) => {
         if (user.role === 'admin') {
-            const adminId = 'adminUniqueId'; // Identificador único para el usuario admin
+            const adminId = 'adminUniqueId';
             done(null, adminId);
         } else {
-            done(null, user.id); // Usar el ID del usuario normal
+            done(null, user.id);
         }
     });
 
     passport.deserializeUser(async (id, done) => {
         if (id === 'adminUniqueId') {
-            const admin = { email: 'adminCoder@coder.com', role: 'admin' }; // Datos del usuario admin
+            const admin = { email: 'adminCoder@coder.com', role: 'admin' };
             done(null, admin);
         } else {
             try {
@@ -108,8 +105,6 @@ export const initializePassport = () => {
             }
         }
     });
-
-
 
 }
 
