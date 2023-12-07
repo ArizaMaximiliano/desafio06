@@ -1,5 +1,5 @@
 {
-  "name": "segundapreentrega",
+  "name": "desafio06",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
@@ -10,15 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ArizaMaximiliano/segundapreentrega.git"
+    "url": "git+https://github.com/ArizaMaximiliano/desafio06.git"
   },
   "keywords": [],
   "author": "Ariza Maximiliano",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ArizaMaximiliano/segundapreentrega/issues"
+    "url": "hhttps://github.com/ArizaMaximiliano/desafio06/issues"
   },
-  "homepage": "https://github.com/ArizaMaximiliano/segundapreentrega#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "connect-mongo": "^5.1.0",
